@@ -1,0 +1,39 @@
+//param height = 10;
+//param roof_color = #ad7859;
+
+//rule Axiom = {
+  //size(8, 0, 8)
+  //quad
+  //House
+//};
+
+//rule House = {
+  //extrude(height)
+  //splitFace(
+//    "top", { Roof },
+    //"vertical", { Facade }
+  //)
+//};
+
+//rule Roof = {
+  //color(roof_color)
+  //roofHip(30, 0.5)
+//};
+//
+//rule Facade = {
+//  color("#dddddd")
+//};
+
+param height = 10;
+
+rule Axiom = {
+  size(8, 0, 11)
+  quad
+  House
+};
+
+rule House = {
+  size(8, 10, 11)
+  quad
+};
+
