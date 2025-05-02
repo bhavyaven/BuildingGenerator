@@ -1,0 +1,3 @@
+C:/Users/bhavy/cs 334/final project/BuildingGenerator/out/build/x64-debug/CMakeFiles/BuildingGenerator.dir
+C:/Users/bhavy/cs 334/final project/BuildingGenerator/out/build/x64-debug/CMakeFiles/edit_cache.dir
+C:/Users/bhavy/cs 334/final project/BuildingGenerator/out/build/x64-debug/CMakeFiles/rebuild_cache.dir

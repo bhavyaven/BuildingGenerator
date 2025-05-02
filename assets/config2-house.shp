@@ -1,0 +1,27 @@
+param width = 1.0;
+param height = 1.0;
+param depth = 1.0;
+
+# S: Starting shape
+shape S
+split(z) { 0.5: B | 0.5: F }
+
+# B: Back
+shape B
+scale(y) 1.5
+
+# F: Front (split into two side blocks)
+shape F
+split(x) { 0.5: 1 | 0.5: 2 }
+
+# 1: Left rotated block (simulated)
+shape 1
+scale(x) 0.25
+scale(z) 0.5
+scale(y) 1.25
+
+# 2: Right rotated block (simulated)
+shape 2
+scale(x) 0.25
+scale(z) 0.5
+scale(y) 1.0

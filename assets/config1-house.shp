@@ -1,0 +1,23 @@
+param width = 1.0;
+param height = 1.0;
+param depth = 1.0;
+
+# S: Start
+shape S
+split(z) { 0.5: B | 0.5: F }
+
+# B: Back
+shape B
+scale(y) 1.5
+
+# F: Front
+shape F
+scale(z) 0.5
+# Note: Interpreter does not support translate/call in this version
+# so we only apply a scale here to avoid crash
+
+# I: Inner front piece (not used unless you add support for call)
+# shape I
+# scale(x) 0.5
+# scale(z) 0.5
+# Not used due to interpreter constraints

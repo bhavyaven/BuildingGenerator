@@ -27,7 +27,7 @@ add_executable(BuildingGenerator
 	${HDR_FILES}
 	${SHADERS}
 	${GLAD_SRC}
- "src/shape.cpp" "src/shader.cpp" "src/mesh.cpp" "src/camera.cpp")
+	"src/shape.cpp" "src/shader.cpp" "src/mesh.cpp" "src/camera.cpp" "src/interpreter.cpp" "src/stb.cpp")
 
 target_include_directories(BuildingGenerator PRIVATE
 	external/glad/include

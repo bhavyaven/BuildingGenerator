@@ -1,0 +1,33 @@
+param width = 1.0;
+param height = 1.0;
+param depth = 1.0;
+
+# S: Start shape
+shape S
+split(z) { 0.5: B | 0.5: F }
+
+# B: Back half
+shape B
+scale(y) 1.0
+
+# F: Front half, split into 3 shapes across X
+shape F
+split(x) { 0.33: 1 | 0.34: 2 | 0.33: 3 }
+
+# 1: Left front block
+shape 1
+scale(x) 0.2
+scale(z) 0.33
+scale(y) 1.25
+
+# 2: Center front block
+shape 2
+scale(x) 0.2
+scale(z) 0.33
+scale(y) 1.0
+
+# 3: Right front block
+shape 3
+scale(x) 0.2
+scale(z) 0.33
+scale(y) 1.5
