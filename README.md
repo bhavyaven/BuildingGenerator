@@ -72,29 +72,60 @@ You need the following installed:
   ```sh
   cd BuildingGenerator
   ```
-3. Build using CMake
-    ```sh
-    mkdir build && cd build
-    cmake ..
-    make
-    ```
-4. Load a ```.shp``` grammar file from under ```assets/```
+3. Load a ```.shp``` grammar file from under ```assets/``` in ```main.cpp```
+```cpp
+ interpreter.loadGrammar("../../assets/config3-house.shp");
+```
+4. Navigate to ```out\build\BuildingGenerator.sln``
+5. Click "Start Without Debugging"
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 <!-- USAGE EXAMPLES -->
 ## Usage
-* Convenient app to keep track of reading list
-* Add new books to your reading list
-* Update book details (title, author, genre, reading status)
-* Delete books you have finished/no longer want to read
-* Filter the list dynamically by status
+* Modify ```.shp``` grammar files to define new architectural rules
+* Adjust view with mouse and keyboard navigation
+* Extend grammar to include doors, chimneys, and multi-floor logic
 
-![alt text](<images/Screenshot 2025-10-22 155549.png>)
-![alt text](<images/Screenshot 2025-10-22 155612.png>)
-![alt text](<images/Screenshot 2025-10-22 155627.png>)
-![alt text](<images/Screenshot 2025-10-22 155637.png>)
+### Example:
+```
+param width = 1.0
+param height = 1.0
+param depth = 1.0
+
+# S: Start shape
+shape S
+split(z) { 0.5: B | 0.5: F }
+
+# B: Back half
+shape B
+add_chimney(right)
+
+# F: Front half, split into 3 blocks across x
+shape F
+split(x) { 0.33: I | 0.34: J | 0.33: K }
+
+# I: Left cube
+shape I
+scale(z) 1.5
+scale(y) 0.5
+
+# J: Middle cube with door
+shape J
+scale(z) 1.5
+scale(y) 0.5
+add_door
+
+# K: Right cube
+shape K
+scale(z) 1.5
+scale(y) 0.5
+```
+
+### Result:
+![alt text](<Screenshot 2025-10-22 170758.png>)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -102,10 +133,10 @@ You need the following installed:
 <!-- ROADMAP -->
 ## Roadmap
 
-- Add user authentication
-- Implement book rating system
-- Add book recommendation feature
-- Enhance frontend UI with better styling
+- Add window modules
+- Implement randomized grammar rule selection
+- Add materials and textures for realism
+- GUI to edit grammar interactively
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -121,5 +152,3 @@ Project Link: [https://github.com/bhavyaven/ToBeRead-List](https://github.com/bh
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
