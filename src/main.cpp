@@ -5,6 +5,7 @@
 #include <iostream>
 #include <vector>
 #include <random>
+#include <unordered_set>
 
 #include <../../external/stb/stb_image.h>
 #include "shape.hpp"
@@ -14,7 +15,6 @@
 #include "mesh.hpp"
 #include "interpreter.hpp"
 
-// Constants
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
@@ -32,7 +32,7 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos) {
         }
 
         float xoffset = xpos - lastX;
-        float yoffset = lastY - ypos; // reversed since y-coordinates go bottom to top
+        float yoffset = lastY - ypos;
 
         lastX = xpos;
         lastY = ypos;
@@ -59,16 +59,21 @@ void processInput(GLFWwindow* window) {
         camera.ProcessKeyboard('D', deltaTime);
 }
 
-// Callbacks
 void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
     glViewport(0, 0, width, height);
 }
 
-// Grammar application
 void applyRule(const Rule& rule, Shape& parent, std::vector<Shape>& output) {
-    float randVal = static_cast<float>(rand()) / RAND_MAX;
-    if (randVal <= rule.probability)
-        rule.func(parent, output);
+    std::vector<Shape> tempOutput;
+    rule.func(parent, tempOutput);
+
+    for (Shape& child : tempOutput) {
+        child.hasDoor = parent.hasDoor;
+        child.hasChim = parent.hasChim;
+        child.chimSide = parent.chimSide;
+
+        output.push_back(child);
+    }
 }
 
 unsigned int loadTexture(const char* path, GLenum slot, GLenum format, GLenum pixelType) {
@@ -98,7 +103,6 @@ unsigned int loadTexture(const char* path, GLenum slot, GLenum format, GLenum pi
     glBindTexture(GL_TEXTURE_2D, 0);
     return texID;
 }
-
 
 int main() {
     glfwInit();
@@ -132,10 +136,7 @@ int main() {
     Mesh cube = createCubeMesh();
     Mesh roof = createRoofMesh();
 
-    // Initial shape
     Material mat = { glm::vec3(0.7f), glm::vec3(0.2f) };
-   /* Shape base('H', glm::vec3(0.0f), glm::vec3(0.0f), glm::vec3(1.0f), mat,
-        glm::vec3(1, 0, 0), glm::vec3(0, 0, 1), false);*/
     if (interpreter.params.count("width")) {
         float width = interpreter.params["width"];
     }
@@ -149,24 +150,31 @@ int main() {
         mat,
         glm::vec3(1, 0, 0),
         glm::vec3(0, 0, 1),
-        false);
+        false, false, "");
 
+    std::unordered_set<char> expanded;
     std::vector<Shape> shapes = { base };
-    for (int i = 0; i < 2; ++i) {
+    for (int i = 0; i < 3; ++i) {
         std::vector<Shape> next;
-        for (auto& s : shapes)
-            interpreter.expand(s, next);
+        for (auto& s : shapes) {
+            if (expanded.count(s.symbol) == 0) {
+                interpreter.expand(s, next);
+                expanded.insert(s.symbol);
+            }
+            else {
+                next.push_back(s);
+            }
+        }
         shapes = next;
     }
 
-    // First grammar rule
     std::vector<Rule> rules;
     rules.emplace_back(1.0f, [](Shape& parent, std::vector<Shape>& output) {
         Shape front = parent;
         front.scale.z *= 0.5f;
         front.position += parent.zAxis * (parent.scale.z * 0.25f);
-        output.push_back(parent); // keep base
-        output.push_back(front); // add front
+        output.push_back(parent);
+        output.push_back(front);
         });
 
     std::vector<Shape> newShapes;
@@ -176,10 +184,10 @@ int main() {
     shapes = newShapes;
 
     shader.use();
-    /*shader.setVec3("roofColor", mat.roofColor);
-    shader.setVec3("wallColor", mat.wallColor);*/
     unsigned int wallTex = loadTexture("../../assets/siding-3.jpg", GL_TEXTURE0, GL_RGB, GL_UNSIGNED_BYTE);
     unsigned int roofTex = loadTexture("../../assets/shingles-2.jpg", GL_TEXTURE0, GL_RGB, GL_UNSIGNED_BYTE);
+    unsigned int doorTex = loadTexture("../../assets/door.jpg", GL_TEXTURE0, GL_RGB, GL_UNSIGNED_BYTE);
+    unsigned int chimTex = loadTexture("../../assets/brick-2.jpg", GL_TEXTURE0, GL_RGB, GL_UNSIGNED_BYTE);
 
 
     while (!glfwWindowShouldClose(window)) {
@@ -198,37 +206,58 @@ int main() {
         shader.setMat4("view", view);
 
         for (auto& shape : shapes) {
-            //glActiveTexture(GL_TEXTURE0);
-            //if (shape.symbol == 'B')  // or however you determine roofs
-            //    glBindTexture(GL_TEXTURE_2D, roofTex);
-            //else
-            //    glBindTexture(GL_TEXTURE_2D, wallTex);
 
             glm::mat4 model = glm::mat4(1.0f);
             model = glm::translate(glm::mat4(1.0f), shape.position);
             model = glm::rotate(model, shape.rotation.y, glm::vec3(0, 1, 0));
-            //model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(0, 1, 0));
             model = glm::scale(model, shape.scale);
             shader.setMat4("model", model);
-            //shader.setVec3("color", shape.material.wallColor);
             shader.setInt("texture1", 0);
             glActiveTexture(GL_TEXTURE0);
             glBindTexture(GL_TEXTURE_2D, wallTex);
             cube.Draw();
 
-            //model = glm::translate(model, shape.position);
-            ////model = glm::rotate(model, shape.rotation.y, glm::vec3(0, 1, 0));
-            //model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(0, 1, 0));
-            //model = glm::scale(model, shape.scale);
-            //shader.setVec3("color", shape.material.wallColor);
-            //shader.setMat4("model", model);
-            //cube.Draw();
-
             glm::mat4 roofModel = glm::translate(model, glm::vec3(0.0f, 1.0f, 0.0f));
-            //shader.setVec3("color", shape.material.roofColor);
             shader.setMat4("model", roofModel);
             glBindTexture(GL_TEXTURE_2D, roofTex);
             roof.Draw();
+            
+            if (shape.hasDoor) {
+                glm::vec3 yAxis = glm::normalize(glm::cross(shape.zAxis, shape.xAxis));
+
+                glm::mat4 doorModel = glm::mat4(1.0f);
+                glm::vec3 doorSize(0.2f, 0.4f, 0.05f); 
+                glm::vec3 doorOffset = yAxis * (shape.scale.y / 8.0f - doorSize.y) + 
+                    shape.zAxis * (shape.scale.z / 1.5f + doorSize.z / 1.5f);   
+
+                doorModel = glm::translate(model, doorOffset);
+                doorModel = glm::scale(doorModel, doorSize);
+                shader.setMat4("model", doorModel);
+                glBindTexture(GL_TEXTURE_2D, doorTex);
+                cube.Draw();
+            }
+
+            if (shape.hasChim) {
+                glm::mat4 chimneyModel = glm::mat4(1.0f);
+                glm::vec3 chimSize(0.1f, 0.4f, 0.1f);
+
+                float xOffset = (shape.chimSide)
+                    ? -shape.scale.x / 2.0f + chimSize.x / 2.0f
+                    : shape.scale.x / 2.0f - chimSize.x / 2.0f;
+
+                float yOffset = 0.5f + chimSize.y / 2.0f;
+
+                float zOffset = -shape.scale.z * -0.1f;
+
+                glm::vec3 chimOffset(xOffset, yOffset, zOffset);
+                chimneyModel = glm::translate(model, chimOffset);
+                chimneyModel = glm::scale(chimneyModel, chimSize);
+
+                shader.setMat4("model", chimneyModel);
+                glBindTexture(GL_TEXTURE_2D, chimTex);  
+                cube.Draw();
+            }
+
         }
 
         glfwSwapBuffers(window);

@@ -1,12 +1,11 @@
 # ninja log v6
-7	677	7677985370586831	CMakeFiles/BuildingGenerator.dir/src/stb.cpp.obj	fd852d3550133bd
-51	147	7678593607145112	clean	8c45b54705a541e8
 336	2138	7678593612257310	CMakeFiles/BuildingGenerator.dir/src/stb.cpp.obj	fd852d3550133bd
+51	147	7678593607145112	clean	8c45b54705a541e8
 113	2165	7678593610034813	CMakeFiles/BuildingGenerator.dir/external/glad/src/glad.c.obj	af681b0dc8e4990c
-269	2451	7678593611574694	CMakeFiles/BuildingGenerator.dir/src/camera.cpp.obj	5806ffd9037d825b
-239	2678	7678593611276139	CMakeFiles/BuildingGenerator.dir/src/mesh.cpp.obj	320ea92d808b57fc
-206	3261	7678593610953267	CMakeFiles/BuildingGenerator.dir/src/shader.cpp.obj	72d7cad6a5a07190
-138	2013	7678602314152839	CMakeFiles/BuildingGenerator.dir/src/shape.cpp.obj	359919d24305c8c2
-213	2894	7678602314930588	CMakeFiles/BuildingGenerator.dir/src/interpreter.cpp.obj	526be8ffb6ec1951
 76	3045	7678602313556019	CMakeFiles/BuildingGenerator.dir/src/main.cpp.obj	6bde3ab339b6c67c
+239	2678	7678593611276139	CMakeFiles/BuildingGenerator.dir/src/mesh.cpp.obj	320ea92d808b57fc
+269	2451	7678593611574694	CMakeFiles/BuildingGenerator.dir/src/camera.cpp.obj	5806ffd9037d825b
+138	2013	7678602314152839	CMakeFiles/BuildingGenerator.dir/src/shape.cpp.obj	359919d24305c8c2
+206	3261	7678593610953267	CMakeFiles/BuildingGenerator.dir/src/shader.cpp.obj	72d7cad6a5a07190
+213	2894	7678602314930588	CMakeFiles/BuildingGenerator.dir/src/interpreter.cpp.obj	526be8ffb6ec1951
 3046	4383	7678602343215820	C:/Users/bhavy/cs 334/final project/BuildingGenerator/out/build/BuildingGenerator.exe	4539b5a58e532c93

@@ -10,8 +10,8 @@ struct RuleEntry {
 };
 
 struct GrammarRule {
-    std::string op;            // e.g., "split", "scale"
-    std::string axis;          // e.g., "x", "z", "y"
+    std::string op;
+    std::string axis;
     std::vector<RuleEntry> entries;
     float scaleFactor = 1.0f;
 };
@@ -23,5 +23,5 @@ public:
     std::unordered_map<std::string, float> params;
 
 private:
-    std::unordered_map<char, GrammarRule> rules;
+    std::unordered_map<std::string, std::vector<GrammarRule>> rules;
 };

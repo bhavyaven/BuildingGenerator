@@ -4,6 +4,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+// adapted from learnopengl.com
 class Camera {
 public:
     glm::vec3 Position;

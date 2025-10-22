@@ -1,4 +1,5 @@
 #include "camera.hpp"
+// adapted from learnopengl.com
 
 Camera::Camera(glm::vec3 position, glm::vec3 up, float yaw, float pitch)
     : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(2.5f),
@@ -16,10 +17,18 @@ glm::mat4 Camera::GetViewMatrix() {
 
 void Camera::ProcessKeyboard(char direction, float deltaTime) {
     float velocity = MovementSpeed * deltaTime;
-    if (direction == 'W') Position += Front * velocity;
-    if (direction == 'S') Position -= Front * velocity;
-    if (direction == 'A') Position -= Right * velocity;
-    if (direction == 'D') Position += Right * velocity;
+    if (direction == 'W') {
+        Position += Front * velocity;
+    }
+    if (direction == 'S') {
+        Position -= Front * velocity;
+    }
+    if (direction == 'A') {
+        Position -= Right * velocity;
+    }
+    if (direction == 'D') {
+        Position += Right * velocity;
+    }
 }
 
 void Camera::ProcessMouseMovement(float xoffset, float yoffset, bool constrainPitch) {
@@ -30,8 +39,12 @@ void Camera::ProcessMouseMovement(float xoffset, float yoffset, bool constrainPi
     Pitch += yoffset;
 
     if (constrainPitch) {
-        if (Pitch > 89.0f) Pitch = 89.0f;
-        if (Pitch < -89.0f) Pitch = -89.0f;
+        if (Pitch > 89.0f) {
+            Pitch = 89.0f;
+        }
+        if (Pitch < -89.0f) {
+            Pitch = -89.0f;
+        }
     }
 
     updateCameraVectors();
@@ -39,8 +52,12 @@ void Camera::ProcessMouseMovement(float xoffset, float yoffset, bool constrainPi
 
 void Camera::ProcessMouseScroll(float yoffset) {
     Zoom -= yoffset;
-    if (Zoom < 1.0f) Zoom = 1.0f;
-    if (Zoom > 45.0f) Zoom = 45.0f;
+    if (Zoom < 1.0f) {
+        Zoom = 1.0f;
+    }
+    if (Zoom > 45.0f) {
+        Zoom = 45.0f;
+    }
 }
 
 void Camera::updateCameraVectors() {

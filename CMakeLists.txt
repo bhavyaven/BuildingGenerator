@@ -5,13 +5,10 @@ cmake_policy(SET CMP0072 NEW)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/out/build)
 
-# Set the library output directory (if you have libraries)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/out/build)
 
-# Set the archive output directory (for static libraries)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/out/build)
 
-# Set the CMake temporary build directory
 set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/out/build)
 
 find_package(OpenGL REQUIRED)

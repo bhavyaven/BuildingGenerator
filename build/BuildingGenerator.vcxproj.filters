@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\bhavy\cs 334\final project\BuildingGenerator\src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\bhavy\cs 334\final project\BuildingGenerator\external\glad\src\glad.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\bhavy\cs 334\final project\BuildingGenerator\src\shape.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\bhavy\cs 334\final project\BuildingGenerator\src\shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\bhavy\cs 334\final project\BuildingGenerator\src\mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\bhavy\cs 334\final project\BuildingGenerator\src\camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\bhavy\cs 334\final project\BuildingGenerator\src\interpreter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\bhavy\cs 334\final project\BuildingGenerator\src\stb.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\bhavy\cs 334\final project\BuildingGenerator\src\camera.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\bhavy\cs 334\final project\BuildingGenerator\src\interpreter.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\bhavy\cs 334\final project\BuildingGenerator\src\mesh.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\bhavy\cs 334\final project\BuildingGenerator\src\rule.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\bhavy\cs 334\final project\BuildingGenerator\src\shader.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\bhavy\cs 334\final project\BuildingGenerator\src\shape.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\bhavy\cs 334\final project\BuildingGenerator\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\bhavy\cs 334\final project\BuildingGenerator\shaders\f.glsl" />
+    <None Include="C:\Users\bhavy\cs 334\final project\BuildingGenerator\shaders\v.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{50EF760C-E067-3F29-938B-C328EF2E0CE6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{F9AD8EFE-B0CF-39B0-9311-E6D0EC52021A}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

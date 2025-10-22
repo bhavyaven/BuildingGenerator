@@ -8,20 +8,19 @@ split(z) { 0.5: B | 0.5: F }
 
 # B: Back
 shape B
+scale(z) 2.0
 scale(y) 1.5
+add_chimney(right)
 
 # F: Front (split into two side blocks)
 shape F
-split(x) { 0.5: 1 | 0.5: 2 }
+split(x) { 0.5: I | 0.5: J }
 
-# 1: Left rotated block (simulated)
-shape 1
-scale(x) 0.25
-scale(z) 0.5
-scale(y) 1.25
+# 1: Left rotated block
+shape I
+scale(z) 1.5
 
-# 2: Right rotated block (simulated)
-shape 2
-scale(x) 0.25
-scale(z) 0.5
-scale(y) 1.0
+# 2: Right rotated block
+shape J
+scale(z) 1.5
+add_door
